@@ -1,0 +1,75 @@
+{
+  "verification": "all raw requests, responses, full-history updates, CSV, bits, initial request, model, question, option order, token totals and hash checked",
+  "initial_request_identical_to_history5": true,
+  "initial_history": [
+    0,
+    1,
+    0,
+    1,
+    0
+  ],
+  "seed_bits_excluded_from_n": true,
+  "completed_n": 200,
+  "http_200_n": 200,
+  "counts": {
+    "0": 200,
+    "1": 0
+  },
+  "request_history_lengths": {
+    "first": 5,
+    "last": 204,
+    "increment": 1
+  },
+  "final_history_length": 205,
+  "all_200_feedback_updates_verified": true,
+  "timestamp_or_salt_in_request": false,
+  "unique_states": 200,
+  "p0": {
+    "mean": 0.6636,
+    "min": 0.55,
+    "max": 0.74,
+    "first": 0.56,
+    "last": 0.67
+  },
+  "blocks_of_50": [
+    {
+      "start": 1,
+      "end": 50,
+      "zeros": 50,
+      "ones": 0,
+      "p0_mean": 0.639
+    },
+    {
+      "start": 51,
+      "end": 100,
+      "zeros": 50,
+      "ones": 0,
+      "p0_mean": 0.6718000000000001
+    },
+    {
+      "start": 101,
+      "end": 150,
+      "zeros": 50,
+      "ones": 0,
+      "p0_mean": 0.6762
+    },
+    {
+      "start": 151,
+      "end": 200,
+      "zeros": 50,
+      "ones": 0,
+      "p0_mean": 0.6674
+    }
+  ],
+  "latency_ms_median": 399.28499999999997,
+  "usage": {
+    "input_tokens": 105000,
+    "output_tokens": 6200
+  },
+  "started_at": "2026-09-22T12:07:01.338595+08:00",
+  "finished_at": "2026-09-22T12:08:22.879853+08:00",
+  "wall_seconds": 81.541258,
+  "bits_file_sha256": "061451b1543aac464f8fce546cd6e0c53181694771cdf83457f861fd31860d07",
+  "comparison_history5_source": "data/history5-200",
+  "inference_boundary": "One 200-output trajectory from seed 01010; experiment conditions were collected at separate times, without randomized interleaving."
+}

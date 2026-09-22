@@ -1,0 +1,53 @@
+{
+  "model": "jev-1.13.0",
+  "experiment_date": "2026-09-22",
+  "timezone": "Asia/Shanghai",
+  "runs": [
+    {
+      "path": "data/fixed-200",
+      "condition": "fixed",
+      "n": 200,
+      "original_run_name": "random-bits-20260922-094842-551239"
+    },
+    {
+      "path": "data/fixed-800",
+      "condition": "fixed",
+      "n": 800,
+      "original_run_name": "random-bits-20260922-101742-274937"
+    },
+    {
+      "path": "data/timestamp-200",
+      "condition": "timestamp",
+      "n": 200,
+      "original_run_name": "random-bits-timestamp-20260922-103510-264909"
+    },
+    {
+      "path": "data/timestamp-salt-200",
+      "condition": "timestamp-salt",
+      "n": 200,
+      "original_run_name": "random-bits-timestamp-salt-20260922-104212-498992"
+    },
+    {
+      "path": "data/salt-200",
+      "condition": "salt",
+      "n": 200,
+      "original_run_name": "random-bits-salt-20260922-105237-801141"
+    },
+    {
+      "path": "data/history5-200",
+      "condition": "history5",
+      "n": 200,
+      "original_run_name": "random-bits-history5-20260922-110226-981660"
+    },
+    {
+      "path": "data/history-all-200",
+      "condition": "history-all",
+      "n": 200,
+      "original_run_name": "random-bits-history-all-20260922-120701-338595"
+    }
+  ],
+  "excluded_from_bit_total": {
+    "data/smoke.json": "six synthetic support-ticket calls",
+    "derived/fixed-1000": "concatenation of fixed-200 and fixed-800, not extra API calls"
+  }
+}

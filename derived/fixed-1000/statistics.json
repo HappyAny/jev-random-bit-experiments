@@ -1,0 +1,160 @@
+{
+  "n": 1000,
+  "zeros": 1000,
+  "ones": 0,
+  "zero_fraction": 1.0,
+  "one_fraction": 0.0,
+  "one_probability_wilson_95_if_iid": [
+    2.168404344971009e-19,
+    0.0038267584855551234
+  ],
+  "primary_frequency_test": {
+    "null": "The bits are iid Bernoulli(0.5)",
+    "p_two_sided": 1.8665272370064378e-301,
+    "log10_p_two_sided": -300.72896566831724,
+    "note": "A small p-value is evidence against the fair-iid null; a large value does not establish randomness."
+  },
+  "runs": {
+    "observed_runs": 1,
+    "longest_identical_run": 1000,
+    "p_two_sided_normal_approx": null,
+    "note": "Normal approximation omitted: fewer than 10 observations of at least one symbol."
+  },
+  "lag1_pearson_correlation": null,
+  "lag1_note": "Descriptive correlation of adjacent pairs; null if either shifted sequence has zero variance or there are fewer than 3 bits.",
+  "transition_counts": {
+    "00": 999,
+    "01": 0,
+    "10": 0,
+    "11": 0
+  },
+  "blocks_of_50": [
+    {
+      "start": 1,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 51,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 101,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 151,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 201,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 251,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 301,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 351,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 401,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 451,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 501,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 551,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 601,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 651,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 701,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 751,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 801,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 851,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 901,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 951,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    }
+  ],
+  "interpretation_boundary": "Finite output tests can detect particular biases or patterns. Passing them cannot prove physical randomness, unpredictability or cryptographic security; 010101 also has a 50/50 proportion.",
+  "source_sha256": "a8fda6ece8d8a254fda86ce7d1ab9fe73ca511c90951080ccb1b624e770a66ff",
+  "batch_sizes": [
+    200,
+    800
+  ],
+  "extension_note": "The later batch was requested after observing the first. Report batch diagnostics separately; pooled fixed-n p-values are descriptive, not a claim of full preregistration. Sequence diagnostics concatenate across session boundaries."
+}

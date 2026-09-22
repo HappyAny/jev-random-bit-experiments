@@ -1,0 +1,50 @@
+{
+  "started_at": "2026-09-22T10:52:37.801141+08:00",
+  "finished_at": "2026-09-22T10:54:31.338382+08:00",
+  "n": 200,
+  "zeros": 199,
+  "ones": 1,
+  "unique_salts": 200,
+  "unique_model_inputs": 200,
+  "salt_bytes": 16,
+  "salt_source": "secrets.token_hex(16), operating-system randomness",
+  "no_timestamp_in_any_model_input": true,
+  "only_state_salt_varied": true,
+  "raw_csv_bits_match": true,
+  "all_http_200": true,
+  "model": "jev-1.13.0",
+  "p0_min": 0.49,
+  "p0_max": 0.67,
+  "p0_mean": 0.5828,
+  "median_ms": 421.135,
+  "one_cases": [
+    {
+      "index": 168,
+      "answer": {
+        "type": "choice",
+        "choice": "1",
+        "confidence": 0.02,
+        "probabilities": {
+          "0": 0.49,
+          "1": 0.51
+        }
+      }
+    }
+  ],
+  "ties_at_returned_precision": [
+    {
+      "index": 101,
+      "answer": {
+        "type": "choice",
+        "choice": "0",
+        "confidence": 0.0,
+        "probabilities": {
+          "0": 0.5,
+          "1": 0.5
+        }
+      }
+    }
+  ],
+  "estimated_usd": 0.0028740600000000003,
+  "interpretation": "The input includes OS-generated random salt; output bits are unmodified Jev choices. Local log timestamps were not sent to the model."
+}

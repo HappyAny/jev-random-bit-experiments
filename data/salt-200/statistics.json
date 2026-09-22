@@ -1,0 +1,60 @@
+{
+  "n": 200,
+  "zeros": 199,
+  "ones": 1,
+  "zero_fraction": 0.995,
+  "one_fraction": 0.005,
+  "one_probability_wilson_95_if_iid": [
+    0.0008831687156009814,
+    0.02777370439789293
+  ],
+  "primary_frequency_test": {
+    "null": "The bits are iid Bernoulli(0.5)",
+    "p_two_sided": 2.501652141700179e-58,
+    "log10_p_two_sided": -57.60177307971177,
+    "note": "A small p-value is evidence against the fair-iid null; a large value does not establish randomness."
+  },
+  "runs": {
+    "observed_runs": 3,
+    "longest_identical_run": 167,
+    "p_two_sided_normal_approx": null,
+    "note": "Normal approximation omitted: fewer than 10 observations of at least one symbol."
+  },
+  "lag1_pearson_correlation": -0.005050505050505051,
+  "lag1_note": "Descriptive correlation of adjacent pairs; null if either shifted sequence has zero variance or there are fewer than 3 bits.",
+  "transition_counts": {
+    "00": 197,
+    "01": 1,
+    "10": 1,
+    "11": 0
+  },
+  "blocks_of_50": [
+    {
+      "start": 1,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 51,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 101,
+      "n": 50,
+      "ones": 0,
+      "one_fraction": 0.0
+    },
+    {
+      "start": 151,
+      "n": 50,
+      "ones": 1,
+      "one_fraction": 0.02
+    }
+  ],
+  "interpretation_boundary": "Finite output tests can detect particular biases or patterns. Passing them cannot prove physical randomness, unpredictability or cryptographic security; 010101 also has a 50/50 proportion.",
+  "source_file": "data/salt-200/bits.txt",
+  "source_sha256": "c7b8744e4abf3a2b5031276831b3fbe831d924b08707a7a9524f9b8a9e7b828d"
+}

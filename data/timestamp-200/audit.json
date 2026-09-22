@@ -1,0 +1,18 @@
+{
+  "started_at": "2026-09-22T10:35:10.264909+08:00",
+  "finished_at": "2026-09-22T10:36:26.606686+08:00",
+  "n": 200,
+  "unique_timestamps": 200,
+  "unique_model_inputs": 200,
+  "only_state_timestamp_varied": true,
+  "raw_csv_bits_match": true,
+  "all_http_200": true,
+  "model": "jev-1.13.0",
+  "p0_min": 0.6,
+  "p0_max": 0.69,
+  "p0_mean": 0.64365,
+  "median_ms": 374.08000000000004,
+  "first_timestamp": "2026-09-22T10:35:10.271503+08:00",
+  "last_timestamp": "2026-09-22T10:36:26.275299+08:00",
+  "estimated_usd": 0.0029064
+}

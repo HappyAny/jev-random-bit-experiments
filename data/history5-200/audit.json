@@ -1,0 +1,77 @@
+{
+  "started_at": "2026-09-22T11:02:26.981660+08:00",
+  "finished_at": "2026-09-22T11:04:05.783670+08:00",
+  "n_new_outputs": 200,
+  "initial_history": [
+    0,
+    1,
+    0,
+    1,
+    0
+  ],
+  "initial_history_source": "five local secrets.randbits(1) draws",
+  "initial_history_excluded_from_statistics": true,
+  "zeros": 200,
+  "ones": 0,
+  "all_200_feedback_steps_verified": true,
+  "no_timestamp_or_salt_in_any_model_input": true,
+  "raw_csv_bits_match": true,
+  "all_http_200": true,
+  "model": "jev-1.13.0",
+  "unique_history_states": 5,
+  "state_summary": [
+    {
+      "history": "01010",
+      "requests": 1,
+      "first_request": 1,
+      "zeros": 1,
+      "ones": 0,
+      "p0_mean": 0.56
+    },
+    {
+      "history": "10100",
+      "requests": 1,
+      "first_request": 2,
+      "zeros": 1,
+      "ones": 0,
+      "p0_mean": 0.56
+    },
+    {
+      "history": "01000",
+      "requests": 1,
+      "first_request": 3,
+      "zeros": 1,
+      "ones": 0,
+      "p0_mean": 0.58
+    },
+    {
+      "history": "10000",
+      "requests": 1,
+      "first_request": 4,
+      "zeros": 1,
+      "ones": 0,
+      "p0_mean": 0.62
+    },
+    {
+      "history": "00000",
+      "requests": 196,
+      "first_request": 5,
+      "zeros": 196,
+      "ones": 0,
+      "p0_mean": 0.5985204081632652
+    }
+  ],
+  "final_history": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "p0_min": 0.56,
+  "p0_max": 0.65,
+  "p0_mean": 0.59815,
+  "median_ms": 411.38,
+  "estimated_usd": 0.0027384,
+  "interpretation": "One rolling feedback trajectory with one five-bit local random initialization; no claims about all 32 possible initial histories or future behavior."
+}

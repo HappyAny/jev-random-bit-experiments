@@ -1,0 +1,22 @@
+{
+  "started_at": "2026-09-22T10:42:12.498992+08:00",
+  "finished_at": "2026-09-22T10:44:06.078965+08:00",
+  "n": 200,
+  "zeros": 200,
+  "ones": 0,
+  "unique_salts": 200,
+  "salt_bytes": 16,
+  "salt_source": "secrets.token_hex(16), operating-system randomness",
+  "unique_timestamps": 200,
+  "unique_model_inputs": 200,
+  "only_state_timestamp_and_salt_varied": true,
+  "raw_csv_bits_match": true,
+  "all_http_200": true,
+  "model": "jev-1.13.0",
+  "p0_min": 0.51,
+  "p0_max": 0.6,
+  "p0_mean": 0.5481,
+  "median_ms": 460.195,
+  "estimated_usd": 0.0031826760000000006,
+  "interpretation": "The input includes local OS-generated random salt; this cannot establish model-intrinsic randomness. No local sampling of output bits occurred."
+}

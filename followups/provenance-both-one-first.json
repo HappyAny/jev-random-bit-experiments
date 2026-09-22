@@ -1,0 +1,56 @@
+{
+  "condition": "fixed-input-both-one-first",
+  "original_run_name": "random-bits-one-first-prompt-one-first-20260923-001447-772035",
+  "files": [
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/audit.json",
+      "public_path": "followups/fixed-both-one-first-200/audit.json",
+      "original_sha256": "0351de5c89819f01a0734fc96a56e1d4dcd4295d8ad4484878f66030078e5af6",
+      "public_sha256": "0351de5c89819f01a0734fc96a56e1d4dcd4295d8ad4484878f66030078e5af6",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/bits.txt",
+      "public_path": "followups/fixed-both-one-first-200/bits.txt",
+      "original_sha256": "061451b1543aac464f8fce546cd6e0c53181694771cdf83457f861fd31860d07",
+      "public_sha256": "061451b1543aac464f8fce546cd6e0c53181694771cdf83457f861fd31860d07",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/metadata.json",
+      "public_path": "followups/fixed-both-one-first-200/metadata.json",
+      "original_sha256": "96fe6e22020ca995376bb07e73a529e894c6d8279bd78da738dc4d9dfd7f5503",
+      "public_sha256": "96fe6e22020ca995376bb07e73a529e894c6d8279bd78da738dc4d9dfd7f5503",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/raw.jsonl",
+      "public_path": "followups/fixed-both-one-first-200/raw.jsonl",
+      "original_sha256": "c17a8edae59a98ab388d297618cca3b3d1fb374c4eb56a1394846a4484799b6e",
+      "public_sha256": "c17a8edae59a98ab388d297618cca3b3d1fb374c4eb56a1394846a4484799b6e",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/request.json",
+      "public_path": "followups/fixed-both-one-first-200/request.json",
+      "original_sha256": "5c2d19ca8068716d4cbe5a6baff5423752e7766b2e2fb75cef68b584d82d6282",
+      "public_sha256": "5c2d19ca8068716d4cbe5a6baff5423752e7766b2e2fb75cef68b584d82d6282",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/samples.csv",
+      "public_path": "followups/fixed-both-one-first-200/samples.csv",
+      "original_sha256": "b8456d0ec63f5752245fcb33e4d4d9dd61b2f4faa797fff94af807795e624499",
+      "public_sha256": "b8456d0ec63f5752245fcb33e4d4d9dd61b2f4faa797fff94af807795e624499",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-prompt-one-first-20260923-001447-772035/statistics.json",
+      "public_path": "followups/fixed-both-one-first-200/statistics.json",
+      "original_sha256": "ce5fdc3413dc5a170e93dc1d574b3ff87b5753f921047ac8348c5386053a1b0c",
+      "public_sha256": "503a0f80382273e3a0aa4c950c9c188fe00edb1704014eeee5599f2ecc3a935e",
+      "transformation": "source_file replaced with repository-relative path"
+    }
+  ],
+  "counting_note": "200 new calls; excluded from historical 2,000-call summary and previous 200-call criteria-only control"
+}

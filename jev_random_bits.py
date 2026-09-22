@@ -40,7 +40,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--n", type=int, default=200, help="Fixed number of sequential requests; no outcome-based stopping")
     parser.add_argument("--model", default="jev-1.13.0")
-    parser.add_argument("--one-first", action="store_true", help="Order the criteria keys as 1 then 0; keep the prompt wording unchanged")
+    parser.add_argument("--one-first", action="store_true", help="Order the criteria keys as 1 then 0; independent of prompt wording")
+    parser.add_argument("--prompt-one-first", action="store_true", help="Change prompt wording from Choose 0 or 1 to Choose 1 or 0")
     parser.add_argument("--timestamp", action="store_true", help="Append the actual per-request timestamp to model-visible state")
     parser.add_argument("--salt", action="store_true", help="Append a fresh secrets.token_hex(16) random salt to model-visible state")
     history_options = parser.add_mutually_exclusive_group()
@@ -58,13 +59,15 @@ def main():
         parser.error("--initial-history requires a history mode and exactly five binary digits")
     tz = timezone(timedelta(hours=8))
     criteria_order = ["1", "0"] if args.one_first else ["0", "1"]
+    prompt_order = ["1", "0"] if args.prompt_one_first else ["0", "1"]
+    record_body = args.one_first or args.prompt_one_first
     payload = {
         "model": args.model,
         "state": "No other information is provided.",
         "questions": {
             "bit": {
                 "type": "choice",
-                "instructions": "Generate one independent random bit. Choose 0 or 1 with equal probability, like a fair coin flip.",
+                "instructions": f"Generate one independent random bit. Choose {prompt_order[0]} or {prompt_order[1]} with equal probability, like a fair coin flip.",
                 "criteria": {key: None for key in criteria_order},
             }
         },
@@ -86,6 +89,8 @@ def main():
         prefix = "random-bits-history-all-" if args.history_all else "random-bits-history5-"
     if args.one_first:
         prefix += "one-first-"
+    if args.prompt_one_first:
+        prefix += "prompt-one-first-"
     root = Path(__file__).resolve().parent / "results" / (prefix + started.strftime("%Y%m%d-%H%M%S-%f"))
     root.mkdir(parents=True, exist_ok=False)
     request_filename = "request_template.json" if args.timestamp or args.salt else "request.json"
@@ -113,7 +118,9 @@ def main():
         "salt_location": "state: appended Random salt line" if args.salt else None,
         "request_definition_file": request_filename,
         "criteria_order": criteria_order, "transport": "requests.Session, redirects disabled, default TLS verification",
-        "serialized_request_body_recorded": args.one_first,
+        "prompt_one_first": args.prompt_one_first,
+        "prompt_order": prompt_order,
+        "serialized_request_body_recorded": record_body,
     }
     (root / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"output_directory": str(root), "planned_n": args.n, "initial_history": initial_history}), flush=True)
@@ -140,9 +147,9 @@ def main():
                 request_payload = with_salt(request_payload, request_salt)
             result = call(session, "POST", "/v1/systemone", secret, request_payload)
             result.update({"index": index, "timestamp": stamp})
-            if args.timestamp or args.salt or history_enabled or args.one_first:
+            if args.timestamp or args.salt or history_enabled or record_body:
                 result["request"] = request_payload
-            if args.one_first:
+            if record_body:
                 result["request_body"] = session.last_request_body
                 prepared = json.loads(session.last_request_body)
                 if prepared != request_payload or list(prepared["questions"]["bit"]["criteria"]) != criteria_order:

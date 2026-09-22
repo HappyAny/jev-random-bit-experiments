@@ -1,6 +1,8 @@
 # Jev 随机比特实验
 
-**最新追加：固定输入，把选项 `1` 放在 `0` 前面，新增 200 次仍全部为 0。** 已逐条核验实际发出的序列化 JSON。当前累计 **2,200 次，2,199 个 0、1 个 1**，覆盖 7 种条件、8 个采集批次。[选项顺序对照报告](docs/RANDOM_BITS_ONE_FIRST.md) · [新增原始数据](followups/fixed-one-first-200/) · [新增离线核验脚本](verify_one_first.py)
+**最新追加（2026-09-23）：提示改为 `Choose 1 or 0`，选项也按 `1, 0` 排列，再测 200 次仍全部为 0。** P(0) 均值为 0.60980；全部实际请求正文已逐条核验。当前累计 **2,400 次，2,399 个 0、1 个 1**，覆盖 8 种条件、9 个采集批次。[提示与选项同时反转报告](docs/RANDOM_BITS_BOTH_ONE_FIRST.md) · [最新原始数据](followups/fixed-both-one-first-200/) · [离线核验脚本](verify_one_first.py)
+
+上一轮只反转 criteria 顺序、提示仍为 `Choose 0 or 1`：200 次同样全为 0，P(0) 均值 0.68140。[仅选项反转报告](docs/RANDOM_BITS_ONE_FIRST.md) · [该轮原始数据](followups/fixed-one-first-200/)。两轮不同时段采集，均值差异不能单独用于确定因果。
 
 以下是首轮 2,000 次的完整快照；表格、配图、`derived/summary.json` 和 `X_POST.md` 中的 2,000 次统计均对应首轮。追加试验单独保存，没有覆盖或重复计入原批次。
 
@@ -83,6 +85,7 @@ git clone https://github.com/HappyAny/jev-random-bit-experiments.git
 cd jev-random-bit-experiments
 python -B verify_dataset.py
 python -B verify_one_first.py
+python -B verify_one_first.py --prompt-one-first
 python -B -m unittest -v test_analyze_bits.py
 python -B analyze_bits.py data/salt-200/bits.txt
 ```

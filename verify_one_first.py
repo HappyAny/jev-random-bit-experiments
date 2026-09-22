@@ -15,11 +15,19 @@ def require(condition, message):
         raise ValueError(message)
 
 
-def verify(run, baseline):
+def verify(run, baseline, prompt_one_first=False):
     meta = json.loads((run / "metadata.json").read_text(encoding="utf-8"))
     request = json.loads((run / "request.json").read_text(encoding="utf-8"))
     original_request = json.loads(baseline.read_text(encoding="utf-8"))
-    require(request == original_request, "Request changed beyond criteria ordering")
+    baseline_prompt = "Generate one independent random bit. Choose 0 or 1 with equal probability, like a fair coin flip."
+    require(original_request["questions"]["bit"]["instructions"] == baseline_prompt, "Unexpected baseline prompt")
+    expected_request = json.loads(json.dumps(original_request))
+    if prompt_one_first:
+        expected_request["questions"]["bit"]["instructions"] = baseline_prompt.replace("Choose 0 or 1", "Choose 1 or 0")
+    require(request == expected_request, "Request changed beyond selected prompt and criteria ordering")
+    require(meta.get("prompt_one_first", False) == prompt_one_first, "Prompt-mode metadata mismatch")
+    if prompt_one_first:
+        require(meta["prompt_order"] == ["1", "0"], "Unexpected prompt-order metadata")
     require(list(original_request["questions"]["bit"]["criteria"]) == ["0", "1"], "Unexpected baseline order")
     require(list(request["questions"]["bit"]["criteria"]) == meta["criteria_order"] == ["1", "0"], "Unexpected follow-up order")
     require(request["model"] == meta["model"] == "jev-1.13.0", "Unexpected model")
@@ -60,27 +68,36 @@ def verify(run, baseline):
     require(len(bodies) == 1, "Input body was not fixed across all requests")
     require({key: counts[key] for key in ["0", "1"]} == meta["counts"], "Count mismatch")
     require(dict(usage) == meta["usage"] and dict(pairs) == meta["probability_pairs_frequency"] and elapsed == meta["request_latency_ms"], "Metadata aggregate mismatch")
-    return {
-        "condition": "fixed-input-one-first", "n": len(bits), "counts": meta["counts"],
+    result = {
+        "condition": "fixed-input-both-one-first" if prompt_one_first else "fixed-input-one-first", "n": len(bits), "counts": meta["counts"],
         "model": meta["model"], "criteria_order": ["1", "0"],
         "started_at": meta["started_at"], "finished_at": meta["finished_at"],
         "p0": {"mean": statistics.mean(p0), "min": min(p0), "max": max(p0)},
         "median_e2e_ms": statistics.median(elapsed), "usage": dict(usage),
-        "verification": {"records_checked": len(records), "identical_serialized_request_bodies": len(bodies), "serialized_criteria_order_verified": True, "baseline_matches_except_key_order": True, "timestamp_salt_history_in_input": False, "all_choices_maximal_in_reported_probabilities": True},
+        "verification": {"records_checked": len(records), "identical_serialized_request_bodies": len(bodies), "serialized_criteria_order_verified": True, "baseline_matches_except_key_order": not prompt_one_first, "timestamp_salt_history_in_input": False, "all_choices_maximal_in_reported_probabilities": True},
         "bits_sha256": meta["bits_file_sha256"],
         "request_body_sha256": hashlib.sha256(next(iter(bodies)).encode("utf-8")).hexdigest(),
         "statistics": analyze(bits),
         "boundary": "Only outbound JSON key order changed. Prompt still says '0 or 1'. Server-side reordering is unknown. Earlier baseline and this follow-up ran at different times, without randomized interleaving.",
     }
+    if prompt_one_first:
+        result["instructions"] = expected_request["questions"]["bit"]["instructions"]
+        result["prompt_order"] = ["1", "0"]
+        result["verification"]["baseline_matches_except_key_order_and_prompt_word_order"] = True
+        result["boundary"] = "Both outbound criteria order and prompt wording use 1 before 0. Server-side criteria reordering is unknown. Earlier control batches and this follow-up ran at different times, without randomized interleaving."
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--run", type=Path, default=Path("followups/fixed-one-first-200"))
+    parser.add_argument("--run", type=Path)
     parser.add_argument("--baseline", type=Path, default=Path("data/fixed-200/request.json"))
+    parser.add_argument("--prompt-one-first", action="store_true", help="Verify the additional prompt-word-order reversal")
     parser.add_argument("--write-audit", action="store_true", help="Save a new audit.json without overwriting an existing file")
     args = parser.parse_args()
-    result = verify(args.run, args.baseline)
+    if args.run is None:
+        args.run = Path("followups/fixed-both-one-first-200" if args.prompt_one_first else "followups/fixed-one-first-200")
+    result = verify(args.run, args.baseline, args.prompt_one_first)
     audit_path = args.run / "audit.json"
     if args.write_audit:
         with audit_path.open("x", encoding="utf-8") as handle:

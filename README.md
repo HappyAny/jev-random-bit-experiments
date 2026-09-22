@@ -1,4 +1,10 @@
-# Jev 随机比特实验：2,000 次请求，1,999 个 0、1 个 1
+# Jev 随机比特实验
+
+**最新追加：固定输入，把选项 `1` 放在 `0` 前面，新增 200 次仍全部为 0。** 已逐条核验实际发出的序列化 JSON。当前累计 **2,200 次，2,199 个 0、1 个 1**，覆盖 7 种条件、8 个采集批次。[选项顺序对照报告](docs/RANDOM_BITS_ONE_FIRST.md) · [新增原始数据](followups/fixed-one-first-200/) · [新增离线核验脚本](verify_one_first.py)
+
+以下是首轮 2,000 次的完整快照；表格、配图、`derived/summary.json` 和 `X_POST.md` 中的 2,000 次统计均对应首轮。追加试验单独保存，没有覆盖或重复计入原批次。
+
+## 首轮：2,000 次请求，1,999 个 0、1 个 1
 
 对 TypeSafe AI 的 `jev-1.13.0` 发出同一个要求：**独立、等概率地选择 0 或 1**。我们依次测试固定输入、时间戳、随机盐和两种历史反馈，共 6 种条件、7 个采集批次、2,000 次真实 API 请求。
 
@@ -57,7 +63,7 @@
 解释时应保留以下边界：
 
 1. Choice 的官方行为就是选择最大概率选项；本试验没有发现该规则被违背，也没有证明接口存在缺陷。返回概率与按概率随机采样是不同操作。[接口说明](https://docs.typesafe.ai/primitives/choice)
-2. 测试只覆盖一个模型版本、一个问题措辞、固定选项顺序。没有做选项反转、标签替换、多个提示或多个初始历史的对照。
+2. 首轮测试只覆盖一个模型版本、一个问题措辞、固定选项顺序。随后增加了[选项反转对照](docs/RANDOM_BITS_ONE_FIRST.md)；标签替换、多个提示或多个初始历史尚未覆盖。
 3. 后续条件是在看到前面结果后逐步提出的；批次在不同时间顺序运行，没有随机交错，不能把概率均值差异直接解释为输入变化的因果效应。
 4. 重复输入下返回的概率也会变化，因此不能从 choice 长时间相同推出内部计算完全确定，也没有证据把现象归因于缓存。
 5. 单纯接近 50/50 不能证明随机：固定交替的 `010101…` 也满足这一比例。有限样本不能认证物理随机性、不可预测性或密码学安全。
@@ -76,6 +82,7 @@ Python 3.10+；离线复核和统计仅使用标准库。
 git clone https://github.com/HappyAny/jev-random-bit-experiments.git
 cd jev-random-bit-experiments
 python -B verify_dataset.py
+python -B verify_one_first.py
 python -B -m unittest -v test_analyze_bits.py
 python -B analyze_bits.py data/salt-200/bits.txt
 ```

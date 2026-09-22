@@ -15,6 +15,15 @@ import requests
 from smoke import BASE_URL, call, probability
 
 
+class BodyRecordingSession(requests.Session):
+    """Record the serialized JSON body passed to the HTTP adapter, never headers."""
+    last_request_body = None
+
+    def send(self, request, **kwargs):
+        self.last_request_body = request.body.decode("utf-8") if isinstance(request.body, bytes) else request.body
+        return super().send(request, **kwargs)
+
+
 def with_timestamp(payload, timestamp):
     return {**payload, "state": payload["state"] + "\nRequest timestamp: " + timestamp}
 
@@ -31,6 +40,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--n", type=int, default=200, help="Fixed number of sequential requests; no outcome-based stopping")
     parser.add_argument("--model", default="jev-1.13.0")
+    parser.add_argument("--one-first", action="store_true", help="Order the criteria keys as 1 then 0; keep the prompt wording unchanged")
     parser.add_argument("--timestamp", action="store_true", help="Append the actual per-request timestamp to model-visible state")
     parser.add_argument("--salt", action="store_true", help="Append a fresh secrets.token_hex(16) random salt to model-visible state")
     history_options = parser.add_mutually_exclusive_group()
@@ -47,6 +57,7 @@ def main():
     if args.initial_history is not None and (not history_enabled or len(args.initial_history) != 5 or set(args.initial_history) - {"0", "1"}):
         parser.error("--initial-history requires a history mode and exactly five binary digits")
     tz = timezone(timedelta(hours=8))
+    criteria_order = ["1", "0"] if args.one_first else ["0", "1"]
     payload = {
         "model": args.model,
         "state": "No other information is provided.",
@@ -54,7 +65,7 @@ def main():
             "bit": {
                 "type": "choice",
                 "instructions": "Generate one independent random bit. Choose 0 or 1 with equal probability, like a fair coin flip.",
-                "criteria": {"0": None, "1": None},
+                "criteria": {key: None for key in criteria_order},
             }
         },
     }
@@ -73,6 +84,8 @@ def main():
     prefix = "random-bits" + ("-timestamp" if args.timestamp else "") + ("-salt" if args.salt else "") + "-"
     if history_enabled:
         prefix = "random-bits-history-all-" if args.history_all else "random-bits-history5-"
+    if args.one_first:
+        prefix += "one-first-"
     root = Path(__file__).resolve().parent / "results" / (prefix + started.strftime("%Y%m%d-%H%M%S-%f"))
     root.mkdir(parents=True, exist_ok=False)
     request_filename = "request_template.json" if args.timestamp or args.salt else "request.json"
@@ -99,7 +112,8 @@ def main():
         "salt_bytes": 16 if args.salt else 0,
         "salt_location": "state: appended Random salt line" if args.salt else None,
         "request_definition_file": request_filename,
-        "criteria_order": ["0", "1"], "transport": "requests.Session, redirects disabled, default TLS verification",
+        "criteria_order": criteria_order, "transport": "requests.Session, redirects disabled, default TLS verification",
+        "serialized_request_body_recorded": args.one_first,
     }
     (root / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({"output_directory": str(root), "planned_n": args.n, "initial_history": initial_history}), flush=True)
@@ -109,7 +123,7 @@ def main():
     probabilities_seen = {}
     completed = 0
     overall_start = time.perf_counter()
-    with requests.Session() as session, (root / "raw.jsonl").open("w", encoding="utf-8") as raw, (root / "bits.txt").open("w", encoding="utf-8") as bits, (root / "samples.csv").open("w", encoding="utf-8", newline="") as csvfile:
+    with BodyRecordingSession() as session, (root / "raw.jsonl").open("w", encoding="utf-8") as raw, (root / "bits.txt").open("w", encoding="utf-8") as bits, (root / "samples.csv").open("w", encoding="utf-8", newline="") as csvfile:
         session.headers.update({"Authorization": "Bearer " + secret, "Accept": "application/json"})
         columns = ["index", "timestamp", "bit", "p0", "p1", "confidence", "model", "elapsed_ms", "input_tokens", "output_tokens"]
         if args.salt:
@@ -126,8 +140,13 @@ def main():
                 request_payload = with_salt(request_payload, request_salt)
             result = call(session, "POST", "/v1/systemone", secret, request_payload)
             result.update({"index": index, "timestamp": stamp})
-            if args.timestamp or args.salt or history_enabled:
+            if args.timestamp or args.salt or history_enabled or args.one_first:
                 result["request"] = request_payload
+            if args.one_first:
+                result["request_body"] = session.last_request_body
+                prepared = json.loads(session.last_request_body)
+                if prepared != request_payload or list(prepared["questions"]["bit"]["criteria"]) != criteria_order:
+                    raise ValueError("Serialized request body or criteria order mismatch")
             if args.salt:
                 result["salt"] = request_salt
             data = result.get("response", {})

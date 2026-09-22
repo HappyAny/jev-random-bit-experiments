@@ -1,0 +1,14 @@
+{
+  "model": "jev-1.13.0",
+  "state": "No other information is provided.",
+  "questions": {
+    "bit": {
+      "type": "choice",
+      "instructions": "Generate one independent random bit. Choose 0 or 1 with equal probability, like a fair coin flip.",
+      "criteria": {
+        "1": null,
+        "0": null
+      }
+    }
+  }
+}

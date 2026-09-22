@@ -12,9 +12,18 @@
     {
       "original_relative_path": "jev_random_bits.py",
       "public_path": "jev_random_bits.py",
-      "original_sha256": "6830adab523758ac24564e7de47e68df64d792d9db19279b8570657e5a94db59",
-      "public_sha256": "6830adab523758ac24564e7de47e68df64d792d9db19279b8570657e5a94db59",
-      "transformation": "none: byte-identical copy"
+      "original_sha256": "9b40ccdb92a2d3ef4bd9725d91f8167c0f4e16da30a61a7311c4db32292a94e5",
+      "public_sha256": "9b40ccdb92a2d3ef4bd9725d91f8167c0f4e16da30a61a7311c4db32292a94e5",
+      "transformation": "none: byte-identical current collector; added --one-first and serialized request-body recording; prior hashes retained",
+      "previous_versions": [
+        {
+          "original_relative_path": "jev_random_bits.py",
+          "public_path": "jev_random_bits.py",
+          "original_sha256": "6830adab523758ac24564e7de47e68df64d792d9db19279b8570657e5a94db59",
+          "public_sha256": "6830adab523758ac24564e7de47e68df64d792d9db19279b8570657e5a94db59",
+          "transformation": "none: byte-identical copy"
+        }
+      ]
     },
     {
       "original_relative_path": "analyze_bits.py",

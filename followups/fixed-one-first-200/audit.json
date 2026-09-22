@@ -1,0 +1,94 @@
+{
+  "condition": "fixed-input-one-first",
+  "n": 200,
+  "counts": {
+    "0": 200,
+    "1": 0
+  },
+  "model": "jev-1.13.0",
+  "criteria_order": [
+    "1",
+    "0"
+  ],
+  "started_at": "2026-09-22T17:01:15.950892+08:00",
+  "finished_at": "2026-09-22T17:03:01.669330+08:00",
+  "p0": {
+    "mean": 0.6814,
+    "min": 0.64,
+    "max": 0.72
+  },
+  "median_e2e_ms": 433.30499999999995,
+  "usage": {
+    "input_tokens": 62000,
+    "output_tokens": 6200
+  },
+  "verification": {
+    "records_checked": 200,
+    "identical_serialized_request_bodies": 1,
+    "serialized_criteria_order_verified": true,
+    "baseline_matches_except_key_order": true,
+    "timestamp_salt_history_in_input": false,
+    "all_choices_maximal_in_reported_probabilities": true
+  },
+  "bits_sha256": "061451b1543aac464f8fce546cd6e0c53181694771cdf83457f861fd31860d07",
+  "request_body_sha256": "97d27d2c082b1c7e95250d4b5c236823677e77f68c0d9d0ee1a183f5aa56c41d",
+  "statistics": {
+    "n": 200,
+    "zeros": 200,
+    "ones": 0,
+    "zero_fraction": 1.0,
+    "one_fraction": 0.0,
+    "one_probability_wilson_95_if_iid": [
+      1.734723475976807e-18,
+      0.018845326377266575
+    ],
+    "primary_frequency_test": {
+      "null": "The bits are iid Bernoulli(0.5)",
+      "p_two_sided": 1.2446030555722283e-60,
+      "log10_p_two_sided": -59.904969137132255,
+      "note": "A small p-value is evidence against the fair-iid null; a large value does not establish randomness."
+    },
+    "runs": {
+      "observed_runs": 1,
+      "longest_identical_run": 200,
+      "p_two_sided_normal_approx": null,
+      "note": "Normal approximation omitted: fewer than 10 observations of at least one symbol."
+    },
+    "lag1_pearson_correlation": null,
+    "lag1_note": "Descriptive correlation of adjacent pairs; null if either shifted sequence has zero variance or there are fewer than 3 bits.",
+    "transition_counts": {
+      "00": 199,
+      "01": 0,
+      "10": 0,
+      "11": 0
+    },
+    "blocks_of_50": [
+      {
+        "start": 1,
+        "n": 50,
+        "ones": 0,
+        "one_fraction": 0.0
+      },
+      {
+        "start": 51,
+        "n": 50,
+        "ones": 0,
+        "one_fraction": 0.0
+      },
+      {
+        "start": 101,
+        "n": 50,
+        "ones": 0,
+        "one_fraction": 0.0
+      },
+      {
+        "start": 151,
+        "n": 50,
+        "ones": 0,
+        "one_fraction": 0.0
+      }
+    ],
+    "interpretation_boundary": "Finite output tests can detect particular biases or patterns. Passing them cannot prove physical randomness, unpredictability or cryptographic security; 010101 also has a 50/50 proportion."
+  },
+  "boundary": "Only outbound JSON key order changed. Prompt still says '0 or 1'. Server-side reordering is unknown. Earlier baseline and this follow-up ran at different times, without randomized interleaving."
+}

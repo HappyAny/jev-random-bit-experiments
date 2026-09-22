@@ -1,0 +1,56 @@
+{
+  "condition": "fixed-input-one-first",
+  "original_run_name": "random-bits-one-first-20260922-170115-950892",
+  "files": [
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/audit.json",
+      "public_path": "followups/fixed-one-first-200/audit.json",
+      "original_sha256": "08f17522af24fc0e40f64ce9d3bef1688a61a2816f58a838afab3d9da972b91e",
+      "public_sha256": "08f17522af24fc0e40f64ce9d3bef1688a61a2816f58a838afab3d9da972b91e",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/bits.txt",
+      "public_path": "followups/fixed-one-first-200/bits.txt",
+      "original_sha256": "061451b1543aac464f8fce546cd6e0c53181694771cdf83457f861fd31860d07",
+      "public_sha256": "061451b1543aac464f8fce546cd6e0c53181694771cdf83457f861fd31860d07",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/metadata.json",
+      "public_path": "followups/fixed-one-first-200/metadata.json",
+      "original_sha256": "8f395b750f4963290e4bebfadee5a968617848001f8abe1775d139809cee4223",
+      "public_sha256": "8f395b750f4963290e4bebfadee5a968617848001f8abe1775d139809cee4223",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/raw.jsonl",
+      "public_path": "followups/fixed-one-first-200/raw.jsonl",
+      "original_sha256": "fec89f22f2f8896dbc488bb81d5bc81afe36a88fb0beaa2c58b7ad2092b837eb",
+      "public_sha256": "fec89f22f2f8896dbc488bb81d5bc81afe36a88fb0beaa2c58b7ad2092b837eb",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/request.json",
+      "public_path": "followups/fixed-one-first-200/request.json",
+      "original_sha256": "a5237034ef882137c12875cb85f29792313fad6efa1cd8f546ccddf1739ab6d2",
+      "public_sha256": "a5237034ef882137c12875cb85f29792313fad6efa1cd8f546ccddf1739ab6d2",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/samples.csv",
+      "public_path": "followups/fixed-one-first-200/samples.csv",
+      "original_sha256": "f1937f8277a2a25d89682aecaefe71374e60d13ad282d6388092400fc602a78a",
+      "public_sha256": "f1937f8277a2a25d89682aecaefe71374e60d13ad282d6388092400fc602a78a",
+      "transformation": "none: byte-identical copy"
+    },
+    {
+      "original_relative_path": "results/random-bits-one-first-20260922-170115-950892/statistics.json",
+      "public_path": "followups/fixed-one-first-200/statistics.json",
+      "original_sha256": "570056197e03d94b866a42f8ba2e1a2170e29b644118e1a97534f77ee9b7cf71",
+      "public_sha256": "9b9ac1c3c153c38a6e20a3c3a6a8ea7151290e0483d04e410bce7f8d38d57918",
+      "transformation": "source_file replaced with repository-relative path"
+    }
+  ],
+  "counting_note": "200 new calls; excluded from the historical 2,000-call summary"
+}
